@@ -14,10 +14,12 @@ export function createApp() {
 
   app.set('trust proxy', 1)
   app.use(helmet())
+  // When CORS_ORIGIN is "*", reflect any origin; otherwise allow only the listed origins.
+  const allowAllOrigins = env.corsOrigins.includes('*')
   app.use(
     cors({
-      origin: env.corsOrigins,
-      credentials: true,
+      origin: allowAllOrigins ? true : env.corsOrigins,
+      credentials: !allowAllOrigins,
     }),
   )
   app.use(express.json({ limit: '10mb' }))
