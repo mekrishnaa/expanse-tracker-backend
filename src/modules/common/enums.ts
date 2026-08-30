@@ -1,7 +1,20 @@
 import { z } from 'zod'
 
 export const txnType = z.enum(['expense', 'income', 'transfer'])
-export const memberRole = z.enum(['admin', 'parent', 'child', 'guest'])
+export const memberRole = z.enum([
+  'admin',
+  'parent',
+  'spouse',
+  'child',
+  'sibling',
+  'grandparent',
+  'uncle',
+  'aunt',
+  'cousin',
+  'friend',
+  'guest',
+  'other',
+])
 export const accountType = z.enum([
   'cash',
   'bank',

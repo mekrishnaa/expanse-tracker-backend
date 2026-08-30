@@ -17,8 +17,16 @@ enum TxnType {
 enum MemberRole {
   admin
   parent
+  spouse
   child
+  sibling
+  grandparent
+  uncle
+  aunt
+  cousin
+  friend
   guest
+  other
 }
 
 enum AccountType {
