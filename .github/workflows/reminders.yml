@@ -1,0 +1,23 @@
+name: Send reminder notifications
+
+# Free scheduler that triggers the backend reminder runner daily.
+# Configure two repository secrets:
+#   API_URL      e.g. https://family-tracker-api.onrender.com/api
+#   CRON_SECRET  must match the CRON_SECRET env var on the server
+on:
+  schedule:
+    - cron: '30 3 * * *' # 03:30 UTC daily (adjust as you like)
+  workflow_dispatch: {}
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call reminder runner
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          curl -fsS -X POST "$API_URL/push/run" \
+            -H "x-cron-secret: $CRON_SECRET" \
+            -H "content-type: application/json"
