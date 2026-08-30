@@ -15,6 +15,12 @@ const schema = z.object({
   LOG_LEVEL: z
     .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace'])
     .default('info'),
+  // Web Push (optional — push is disabled if unset)
+  VAPID_PUBLIC_KEY: z.string().optional(),
+  VAPID_PRIVATE_KEY: z.string().optional(),
+  VAPID_SUBJECT: z.string().default('mailto:admin@family-tracker.local'),
+  // Secret required to trigger the reminder run endpoint
+  CRON_SECRET: z.string().optional(),
 })
 
 const parsed = schema.safeParse(process.env)
@@ -34,4 +40,5 @@ export const env = {
   ...raw,
   isProd: raw.NODE_ENV === 'production',
   corsOrigins: raw.CORS_ORIGIN.split(',').map((o) => o.trim()),
+  pushEnabled: Boolean(raw.VAPID_PUBLIC_KEY && raw.VAPID_PRIVATE_KEY),
 }

@@ -13,6 +13,7 @@ import { notesRouter } from './modules/notes/notes.routes'
 import { templatesRouter } from './modules/templates/templates.routes'
 import { settingsRouter } from './modules/settings/settings.routes'
 import { migrationRouter } from './modules/migration/migration.routes'
+import { pushRouter } from './modules/push/push.routes'
 import { healthRouter } from './modules/health/health.routes'
 
 export const apiRouter = Router()
@@ -32,3 +33,4 @@ apiRouter.use('/notes', notesRouter)
 apiRouter.use('/templates', templatesRouter)
 apiRouter.use('/settings', settingsRouter)
 apiRouter.use('/migration', migrationRouter)
+apiRouter.use('/push', pushRouter)

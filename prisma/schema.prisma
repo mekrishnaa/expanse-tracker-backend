@@ -59,6 +59,8 @@ model Family {
   notes         Note[]
   templates     Template[]
   settings      Setting[]
+  pushSubscriptions PushSubscription[]
+  sentNotifications SentNotification[]
 }
 
 model User {
@@ -287,4 +289,27 @@ model Setting {
   userId    String   @unique
   data      Json
   updatedAt DateTime @updatedAt
+}
+
+model PushSubscription {
+  id        String   @id @default(uuid())
+  familyId  String
+  family    Family   @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  userId    String
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now())
+
+  @@index([familyId])
+}
+
+model SentNotification {
+  id        String   @id @default(uuid())
+  familyId  String
+  family    Family   @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  dedupKey  String
+  createdAt DateTime @default(now())
+
+  @@unique([familyId, dedupKey])
 }
