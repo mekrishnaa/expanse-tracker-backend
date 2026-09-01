@@ -327,6 +327,7 @@ export async function exportBackup(familyId: string) {
   const data = {
     members: members.map((r, i) => ({
       id: i + 1,
+      serverId: r.id,
       name: r.name,
       role: r.role,
       color: r.color,
@@ -336,6 +337,7 @@ export async function exportBackup(familyId: string) {
     })),
     categories: categories.map((r, i) => ({
       id: i + 1,
+      serverId: r.id,
       name: r.name,
       type: r.type,
       icon: r.icon,
@@ -347,6 +349,7 @@ export async function exportBackup(familyId: string) {
     })),
     accounts: accounts.map((r, i) => ({
       id: i + 1,
+      serverId: r.id,
       name: r.name,
       type: r.type,
       balance: dec(r.balance),
@@ -356,6 +359,7 @@ export async function exportBackup(familyId: string) {
     })),
     budgets: budgets.map((r, i) => ({
       id: i + 1,
+      serverId: r.id,
       categoryId: num(categoryId, r.categoryId),
       month: r.month,
       limit: dec(r.limit),
@@ -364,6 +368,7 @@ export async function exportBackup(familyId: string) {
     })),
     goals: goals.map((r, i) => ({
       id: i + 1,
+      serverId: r.id,
       name: r.name,
       emoji: r.emoji,
       targetAmount: dec(r.targetAmount),
@@ -375,6 +380,7 @@ export async function exportBackup(familyId: string) {
     })),
     bills: bills.map((r, i) => ({
       id: i + 1,
+      serverId: r.id,
       name: r.name,
       amount: dec(r.amount),
       categoryId: num(categoryId, r.categoryId),
@@ -390,12 +396,14 @@ export async function exportBackup(familyId: string) {
     })),
     shoppingLists: shoppingLists.map((r, i) => ({
       id: i + 1,
+      serverId: r.id,
       name: r.name,
       emoji: r.emoji,
       createdAt: epoch(r.createdAt),
     })),
     shoppingItems: shoppingItems.map((r, i) => ({
       id: i + 1,
+      serverId: r.id,
       listId: num(listId, r.listId),
       name: r.name,
       qty: r.qty ?? undefined,
@@ -405,6 +413,7 @@ export async function exportBackup(familyId: string) {
     })),
     notes: notes.map((r, i) => ({
       id: i + 1,
+      serverId: r.id,
       title: r.title,
       content: r.content,
       pinned: r.pinned,
@@ -414,6 +423,7 @@ export async function exportBackup(familyId: string) {
     })),
     templates: templates.map((r, i) => ({
       id: i + 1,
+      serverId: r.id,
       label: r.label,
       emoji: r.emoji ?? undefined,
       type: r.type,
@@ -429,6 +439,7 @@ export async function exportBackup(familyId: string) {
     })),
     transactions: transactions.map((r, i) => ({
       id: i + 1,
+      serverId: r.id,
       type: r.type,
       amount: dec(r.amount),
       categoryId: num(categoryId, r.categoryId),
