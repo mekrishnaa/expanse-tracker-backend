@@ -18,6 +18,8 @@ jobs:
           API_URL: ${{ secrets.API_URL }}
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
+          API_URL="$(echo -n "$API_URL" | xargs)"
+          CRON_SECRET="$(echo -n "$CRON_SECRET" | xargs)"
           curl -fsS -X POST "$API_URL/push/run" \
             -H "x-cron-secret: $CRON_SECRET" \
             -H "content-type: application/json"
